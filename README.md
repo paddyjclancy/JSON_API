@@ -12,15 +12,24 @@ This repo explores using the package Requests, to make GET and POST request to a
 - Set of functions / procedures
 - Defines interactions between internal systems - computers, servers, etc
 - Allows applications to "talk to each other" by dealing with requests
-- eg JSON, XML
+- eg Amazon S3, Google Maps
 
-url_target = path + arguments
+- Formats: JSON, XML
+
+##### url_target = path + arguments
+##### path = 'http://api.postcodes.io/postcodes/'
+##### arguments = 'e147le'
 
 ## What is JSON
 - JavaScript Object Notation
 - File format, for storing, parsing and transferring data with ease
 - Dictionaries / Arrays
 - Became web standard for front-end development because of simplicity, and as browsers only use HTML, CSS or JS <-- 
+
+- Receiving info in JSON from API:
+    - API Response --> JSON --> Python JSON. library (parsing) --> JSON --> Python dict object
+- Sending info using API:
+    - Python dict object --> Python JSON. library (parsing)  --> JSON --> API Destination
 
 
 ## HTTP GET VS POST
@@ -29,11 +38,11 @@ Get:
 - Requests data from specified resource (eg website)
 - Visible, and cached
     - Should not contain sensitive info
-- Can't modify data
+- Shouldn't modify data
 - eg search page
 
 Post:
-- Used when changing something
+- Used when changing something, not limited to
 - Contains info in body
 - Not cached or stored
 - May insert a new, or update resource
