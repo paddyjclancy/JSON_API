@@ -1,24 +1,24 @@
 import requests
 
-path = 'http://api.postcodes.io/postcodes/'
-argument = 'wd79lb'
-target_url = path + argument
 
-print(target_url)
+def geo_locate(postcode):
+    response = requests.get(path + postcode)
+    if response.status_code == 400:
+        print("Oops, something went wrong")
+    elif response.status_code == 200:
+        response_dict = response.json()
+        result_dict = response_dict['result']
+        print(
+            f"Your longitude is {result_dict['longitude']}, your latitude is {result_dict['latitude']}, your parliamentary_constituency is {result_dict['parliamentary_constituency']},  and your NUTS value is {result_dict['nuts']}")
+    else:
+        print("Please try again - Better luck next time")
 
-response = requests.get(target_url)
+while True:
+    postcode = (input("Please enter a postcode, or enter 'exit':   ")).replace(" ", "").lower()
+    path = 'http://api.postcodes.io/postcodes/'
 
-print(response)
-print(type(response))
-
-print(response.json())
-
-response_dict = response.json()
-print(type(response_dict))
-
-
-result_dict = response_dict['result']
-print(result_dict)
-
-for key in result_dict.keys():
-    print(key.title(), '- the value inside this key is:', result_dict[key])
+    if postcode == "exit":
+        print("Goodbye")
+        break
+    else:
+        geo_locate(postcode)
